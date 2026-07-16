@@ -3,11 +3,12 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { GithubIcon, MenuIcon } from "lucide-react"
+import { MenuIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { mainNav, siteConfig } from "@/config/site"
 import { Logo } from "@/components/common/logo"
+import { GitHubIcon } from "@/components/common/icons"
 import { ThemeToggle } from "@/components/layout/theme-toggle"
 import { Button } from "@/components/ui/button"
 import {
@@ -46,19 +47,23 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button variant="ghost" size="icon" asChild>
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="View source on GitHub"
-            >
-              <GithubIcon className="size-4" />
-            </a>
+          <Button
+            variant="ghost"
+            size="icon"
+            render={
+              <a
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View source on GitHub"
+              />
+            }
+          >
+            <GitHubIcon className="size-4" />
           </Button>
           <ThemeToggle />
-          <Button size="sm" asChild>
-            <Link href="/tools">Open Tools</Link>
+          <Button size="sm" render={<Link href="/tools" />}>
+            Open Tools
           </Button>
         </div>
 
@@ -88,8 +93,10 @@ export function SiteHeader() {
                 ))}
               </nav>
               <div className="mt-auto flex flex-col gap-2 p-4">
-                <Button asChild onClick={() => setOpen(false)}>
-                  <Link href="/tools">Open Tools</Link>
+                <Button
+                  render={<Link href="/tools" onClick={() => setOpen(false)} />}
+                >
+                  Open Tools
                 </Button>
               </div>
             </SheetContent>

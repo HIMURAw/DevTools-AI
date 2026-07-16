@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google"
 
 import { siteConfig } from "@/config/site"
 import { AppProviders } from "@/providers/app-providers"
+import { SiteHeader } from "@/components/layout/site-header"
+import { SiteFooter } from "@/components/layout/site-footer"
 
 import "./globals.css"
 
@@ -62,7 +64,11 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <SiteHeader />
+          <main className="flex-1">{children}</main>
+          <SiteFooter />
+        </AppProviders>
       </body>
     </html>
   )
