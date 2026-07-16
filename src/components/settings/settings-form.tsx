@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes"
 import { MonitorIcon, MoonIcon, RotateCcwIcon, SunIcon } from "lucide-react"
 
+import { useMounted } from "@/hooks/use-mounted"
 import { useSettingsStore } from "@/lib/store/settings-store"
 import { AI_MODELS } from "@/config/models"
 import {
@@ -33,6 +34,7 @@ const themeOptions = [
 
 export function SettingsForm() {
   const { theme, setTheme } = useTheme()
+  const mounted = useMounted()
   const model = useSettingsStore((state) => state.model)
   const temperature = useSettingsStore((state) => state.temperature)
   const maxTokens = useSettingsStore((state) => state.maxTokens)
@@ -53,7 +55,7 @@ export function SettingsForm() {
         <div className="flex gap-2">
           {themeOptions.map((option) => {
             const Icon = option.icon
-            const active = theme === option.value
+            const active = mounted && theme === option.value
             return (
               <Button
                 key={option.value}
