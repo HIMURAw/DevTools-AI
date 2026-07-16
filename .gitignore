@@ -46,6 +46,10 @@ web_modules/
 
 # TypeScript cache
 *.tsbuildinfo
+next-env.d.ts
+
+# Vercel
+.vercel
 
 # Optional npm cache directory
 .npm
@@ -141,3 +145,5 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+CLAUDE.md
