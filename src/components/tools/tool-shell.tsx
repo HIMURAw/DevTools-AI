@@ -1,7 +1,8 @@
 "use client"
 
+import * as React from "react"
 import Link from "next/link"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, useForm, useWatch } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { RotateCcwIcon, SparklesIcon, WandSparklesIcon } from "lucide-react"
 import type { ZodType } from "zod"
@@ -11,6 +12,7 @@ import { useAiCompletion } from "@/hooks/use-ai-completion"
 import { useSettingsStore } from "@/lib/store/settings-store"
 import { AI_MODELS } from "@/config/models"
 import { getToolBySlug } from "@/config/tools.config"
+import { detectLanguage } from "@/lib/utils/detect-language"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -52,8 +54,9 @@ function ToolShellForTool({ tool }: { tool: ToolDefinition }) {
     register,
     handleSubmit,
     control,
+    setValue,
     reset: resetForm,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<ToolInput>({
     resolver: zodResolver(tool.schema as ZodType<ToolInput, ToolInput>),
     defaultValues: emptyDefaults(tool),
@@ -62,6 +65,23 @@ function ToolShellForTool({ tool }: { tool: ToolDefinition }) {
   const onSubmit = handleSubmit((values) => {
     execute({ input: values, model, temperature, maxTokens })
   })
+
+  const hasLanguageField = tool.fields.some((field) => field.id === "language")
+  const codeValue = useWatch({ control, name: "input" })
+  const languageTouched = Boolean(dirtyFields.language)
+
+  React.useEffect(() => {
+    if (!hasLanguageField || languageTouched) return
+
+    const timer = setTimeout(() => {
+      const detected = detectLanguage(codeValue ?? "")
+      if (detected) {
+        setValue("language", detected, { shouldDirty: false })
+      }
+    }, 400)
+
+    return () => clearTimeout(timer)
+  }, [codeValue, hasLanguageField, languageTouched, setValue])
 
   const handleLoadExample = () => {
     resetForm(tool.exampleInput)

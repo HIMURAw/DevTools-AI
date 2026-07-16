@@ -37,6 +37,13 @@ export const AI_MODELS: AiModelOption[] = [
     description: "Large context, frontier-leaning reasoning model.",
     contextLength: 1000000,
   },
+  {
+    id: "meta-llama/llama-3-8b-instruct:free",
+    label: "Llama 3 8B Instruct (free)",
+    provider: "Meta",
+    description: "Efficient, high-quality instruction-following model.",
+    contextLength: 8192,
+  },
 ] as const
 
 export const DEFAULT_MODEL_ID = AI_MODELS[0].id

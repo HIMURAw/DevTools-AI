@@ -27,7 +27,7 @@ const CODE_FIELDS_LANGUAGE = {
   id: "language",
   label: "Language",
   type: "text" as const,
-  placeholder: "e.g. TypeScript (optional)",
+  placeholder: "Auto-detected from your code — edit to override",
   required: false,
 }
 
