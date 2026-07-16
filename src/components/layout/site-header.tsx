@@ -24,7 +24,7 @@ export function SiteHeader() {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header className="glass-nav sticky top-0 z-50 w-full border-b border-border/60">
+    <header className="glass-nav sticky top-0 z-50 w-full border-b border-white/8">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
@@ -62,7 +62,11 @@ export function SiteHeader() {
             <GitHubIcon className="size-4" />
           </Button>
           <ThemeToggle />
-          <Button size="sm" render={<Link href="/tools" />}>
+          <Button
+            size="sm"
+            className="bg-gradient-brand font-semibold text-white hover:opacity-90"
+            render={<Link href="/tools" />}
+          >
             Open Tools
           </Button>
         </div>

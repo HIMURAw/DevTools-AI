@@ -6,49 +6,108 @@ import { ArrowRightIcon } from "lucide-react"
 
 import { tools } from "@/config/tools.config"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
+
+const categoryColors: Record<string, string> = {
+  analyze: "border-violet-500/30 text-violet-400 bg-violet-500/10",
+  generate: "border-cyan-500/30 text-cyan-400 bg-cyan-500/10",
+  convert: "border-rose-500/30 text-rose-400 bg-rose-500/10",
+}
 
 export function ToolsShowcase() {
   return (
-    <section id="tools" className="relative py-20 sm:py-24">
+    <section id="tools" className="relative py-20 sm:py-28">
+      {/* Side glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-0 w-1/3 opacity-10"
+        style={{
+          background:
+            "radial-gradient(ellipse at left center, color-mix(in oklch, var(--brand-from) 80%, transparent) 0%, transparent 70%)",
+          filter: "blur(60px)",
+        }}
+      />
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center">
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Ten tools. One workflow.
+        {/* Section heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center text-center"
+        >
+          <Badge
+            variant="outline"
+            className="mb-4 rounded-full border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground"
+          >
+            10 tools included
+          </Badge>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            Ten tools.{" "}
+            <span className="text-gradient-brand">One workflow.</span>
           </h2>
           <p className="mt-4 max-w-xl text-balance text-muted-foreground">
             Every tool shares the same clean input-output interface, so
             switching between them never breaks your flow.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Tools grid */}
+        <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool, index) => {
             const Icon = tool.icon
             return (
               <motion.div
                 key={tool.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (index % 3) * 0.06 }}
+                transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
               >
                 <Link
                   href={`/tools/${tool.slug}`}
-                  className="group glass-panel relative flex h-full flex-col gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5"
+                  className={cn(
+                    "group glass-card relative flex h-full flex-col gap-4 rounded-2xl p-5",
+                    "border border-white/8 transition-all duration-300",
+                    "hover:-translate-y-1 hover:border-violet-500/30",
+                    "hover:shadow-[0_0_30px_color-mix(in_oklch,var(--brand-via)_12%,transparent)]"
+                  )}
                 >
+                  {/* Icon + arrow row */}
                   <div className="flex items-center justify-between">
-                    <span className="bg-gradient-brand flex size-10 items-center justify-center rounded-xl text-white">
+                    <span className="icon-gradient flex size-11 items-center justify-center rounded-xl text-white">
                       <Icon className="size-5" />
                     </span>
-                    <ArrowRightIcon className="size-4 -translate-x-1 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                    <ArrowRightIcon
+                      className={cn(
+                        "size-4 -translate-x-1 text-muted-foreground opacity-0",
+                        "transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-violet-400"
+                      )}
+                    />
                   </div>
-                  <div>
-                    <h3 className="font-heading text-base font-semibold">
+
+                  {/* Text */}
+                  <div className="flex-1">
+                    <h3 className="font-heading text-base font-semibold leading-snug">
                       {tool.name}
                     </h3>
-                    <p className="mt-1.5 text-sm text-muted-foreground">
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                       {tool.shortDescription}
                     </p>
+                  </div>
+
+                  {/* Category badge */}
+                  <div>
+                    <span
+                      className={cn(
+                        "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
+                        categoryColors[tool.category]
+                      )}
+                    >
+                      {tool.category}
+                    </span>
                   </div>
                 </Link>
               </motion.div>
@@ -56,12 +115,23 @@ export function ToolsShowcase() {
           })}
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <Button variant="outline" render={<Link href="/tools" />}>
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-10 flex justify-center"
+        >
+          <Button
+            variant="outline"
+            className="glass-panel border-white/10 px-6 hover:border-white/20"
+            render={<Link href="/tools" />}
+          >
             View all tools
             <ArrowRightIcon className="size-4" />
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -12,7 +12,7 @@ const footerColumns = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border/60">
+    <footer className="border-t border-white/8 bg-background/60 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-3">
@@ -61,7 +61,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-6 sm:flex-row">
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} {siteConfig.name}. Released
             under the MIT License.
