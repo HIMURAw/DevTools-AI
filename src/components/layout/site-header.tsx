@@ -36,7 +36,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                  "text-muted-foreground hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   active && "text-foreground"
                 )}
               >
@@ -50,6 +50,7 @@ export function SiteHeader() {
           <Button
             variant="ghost"
             size="icon"
+            nativeButton={false}
             render={
               <a
                 href={siteConfig.links.github}
@@ -65,6 +66,7 @@ export function SiteHeader() {
           <Button
             size="sm"
             className="bg-gradient-brand font-semibold text-white hover:opacity-90"
+            nativeButton={false}
             render={<Link href="/tools" />}
           >
             Open Tools
@@ -90,7 +92,7 @@ export function SiteHeader() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-md px-3 py-2 text-sm font-medium transition-colors"
                   >
                     {item.title}
                   </Link>
@@ -98,6 +100,7 @@ export function SiteHeader() {
               </nav>
               <div className="mt-auto flex flex-col gap-2 p-4">
                 <Button
+                  nativeButton={false}
                   render={<Link href="/tools" onClick={() => setOpen(false)} />}
                 >
                   Open Tools

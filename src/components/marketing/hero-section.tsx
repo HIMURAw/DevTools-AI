@@ -40,14 +40,24 @@ const highlights = [
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden">
-      {/* Grid + glow background */}
+      {/* Grid + glow background — kept as separate layers; both set
+          background-image/background-size, so combining them on one
+          element lets one utility's background-size clobber the other's
+          gradients (each blob gets tiled into tiny squares). */}
       <div
         aria-hidden
-        className="bg-glow bg-grid pointer-events-none absolute inset-0 -z-10"
+        className="bg-grid pointer-events-none absolute inset-0 -z-10"
+      />
+      <div
+        aria-hidden
+        className="bg-glow pointer-events-none absolute inset-0 -z-10"
       />
 
       {/* Floating orbs */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
         <div
           className="orb-1 absolute -top-32 left-1/4 h-80 w-80 rounded-full opacity-30"
           style={{
@@ -97,10 +107,9 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08 }}
-          className="mt-7 text-balance text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl"
+          className="mt-7 text-5xl font-bold tracking-tight text-balance sm:text-6xl md:text-7xl"
         >
-          The AI toolkit{" "}
-          <br className="hidden sm:block" />
+          The AI toolkit <br className="hidden sm:block" />
           developers{" "}
           <span className="text-gradient-brand">actually reach for</span>
         </motion.h1>
@@ -110,7 +119,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.16 }}
-          className="mt-6 max-w-2xl text-balance text-lg text-muted-foreground"
+          className="text-muted-foreground mt-6 max-w-2xl text-lg text-balance"
         >
           {siteConfig.description}
         </motion.p>
@@ -125,7 +134,7 @@ export function HeroSection() {
           {highlights.map((h) => (
             <span
               key={h}
-              className="flex items-center gap-1.5 text-sm text-muted-foreground"
+              className="text-muted-foreground flex items-center gap-1.5 text-sm"
             >
               <CheckIcon className="size-3.5 text-violet-400" />
               {h}
@@ -142,7 +151,8 @@ export function HeroSection() {
         >
           <Button
             size="lg"
-            className="h-11 gap-2 bg-gradient-brand px-7 font-semibold text-white hover:opacity-90"
+            className="bg-gradient-brand h-11 gap-2 px-7 font-semibold text-white hover:opacity-90"
+            nativeButton={false}
             render={<Link href="/tools" />}
           >
             Explore the tools
@@ -152,6 +162,7 @@ export function HeroSection() {
             size="lg"
             variant="outline"
             className="glass-panel h-11 gap-2 border-white/10 px-7 hover:border-white/20"
+            nativeButton={false}
             render={
               <a
                 href={siteConfig.links.github}
@@ -172,7 +183,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.45 }}
           className="mt-16 w-full max-w-2xl"
         >
-          <div className="glass-card rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
+          <div className="glass-card overflow-hidden rounded-2xl shadow-2xl shadow-black/40">
             {/* Terminal title bar */}
             <div className="flex items-center gap-2 border-b border-white/8 bg-white/3 px-4 py-3">
               <div className="flex items-center gap-1.5">
@@ -180,7 +191,7 @@ export function HeroSection() {
                 <span className="size-3 rounded-full bg-yellow-500/70" />
                 <span className="size-3 rounded-full bg-green-500/70" />
               </div>
-              <div className="ml-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+              <div className="text-muted-foreground ml-3 flex items-center gap-1.5 text-xs">
                 <TerminalIcon className="size-3" />
                 <span className="font-mono">devtools-ai</span>
               </div>
@@ -198,7 +209,7 @@ export function HeroSection() {
                   <span
                     className={
                       line.prompt === "$"
-                        ? "text-violet-400 shrink-0"
+                        ? "shrink-0 text-violet-400"
                         : "text-muted-foreground/50 shrink-0"
                     }
                   >

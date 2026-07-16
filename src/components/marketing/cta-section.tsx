@@ -37,7 +37,9 @@ export function CtaSection() {
               <span className="text-gradient-brand text-3xl font-bold tracking-tight sm:text-4xl">
                 {stat.value}
               </span>
-              <span className="text-sm text-muted-foreground">{stat.label}</span>
+              <span className="text-muted-foreground text-sm">
+                {stat.label}
+              </span>
             </motion.div>
           ))}
         </motion.div>
@@ -74,7 +76,7 @@ export function CtaSection() {
                 }}
               />
               <div
-                className="absolute bottom-0 right-1/4 h-48 w-48 rounded-full opacity-25"
+                className="absolute right-1/4 bottom-0 h-48 w-48 rounded-full opacity-25"
                 style={{
                   background:
                     "radial-gradient(circle, color-mix(in oklch, var(--brand-to) 70%, transparent) 0%, transparent 70%)",
@@ -88,11 +90,10 @@ export function CtaSection() {
               <ZapIcon className="size-7" />
             </div>
 
-            <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Ready to{" "}
-              <span className="text-gradient-brand">ship faster?</span>
+            <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl">
+              Ready to <span className="text-gradient-brand">ship faster?</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-lg text-balance text-lg text-muted-foreground">
+            <p className="text-muted-foreground mx-auto mt-5 max-w-lg text-lg text-balance">
               Drop in your OpenRouter API key and start using all ten tools in
               under a minute. No sign-up required.
             </p>
@@ -100,7 +101,8 @@ export function CtaSection() {
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Button
                 size="lg"
-                className="h-12 gap-2 bg-gradient-brand px-8 text-base font-semibold text-white hover:opacity-90"
+                className="bg-gradient-brand h-12 gap-2 px-8 text-base font-semibold text-white hover:opacity-90"
+                nativeButton={false}
                 render={<Link href="/tools" />}
               >
                 Get started free
@@ -109,7 +111,8 @@ export function CtaSection() {
               <Button
                 size="lg"
                 variant="ghost"
-                className="h-12 px-8 text-base text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground h-12 px-8 text-base"
+                nativeButton={false}
                 render={<Link href="/docs" />}
               >
                 Read the docs
@@ -117,7 +120,7 @@ export function CtaSection() {
             </div>
 
             {/* Trust note */}
-            <p className="mt-6 text-xs text-muted-foreground/60">
+            <p className="text-muted-foreground/60 mt-6 text-xs">
               Your API key is never stored. All requests are processed
               client-side.
             </p>

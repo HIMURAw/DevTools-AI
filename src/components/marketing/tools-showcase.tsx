@@ -7,13 +7,7 @@ import { ArrowRightIcon } from "lucide-react"
 import { tools } from "@/config/tools.config"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
-
-const categoryColors: Record<string, string> = {
-  analyze: "border-violet-500/30 text-violet-400 bg-violet-500/10",
-  generate: "border-cyan-500/30 text-cyan-400 bg-cyan-500/10",
-  convert: "border-rose-500/30 text-rose-400 bg-rose-500/10",
-}
+import { ToolCard } from "@/components/tools/tool-card"
 
 export function ToolsShowcase() {
   return (
@@ -40,7 +34,7 @@ export function ToolsShowcase() {
         >
           <Badge
             variant="outline"
-            className="mb-4 rounded-full border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground"
+            className="text-muted-foreground mb-4 rounded-full border-white/10 bg-white/5 px-3 py-1 text-xs"
           >
             10 tools included
           </Badge>
@@ -48,7 +42,7 @@ export function ToolsShowcase() {
             Ten tools.{" "}
             <span className="text-gradient-brand">One workflow.</span>
           </h2>
-          <p className="mt-4 max-w-xl text-balance text-muted-foreground">
+          <p className="text-muted-foreground mt-4 max-w-xl text-balance">
             Every tool shares the same clean input-output interface, so
             switching between them never breaks your flow.
           </p>
@@ -56,63 +50,17 @@ export function ToolsShowcase() {
 
         {/* Tools grid */}
         <div className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {tools.map((tool, index) => {
-            const Icon = tool.icon
-            return (
-              <motion.div
-                key={tool.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
-              >
-                <Link
-                  href={`/tools/${tool.slug}`}
-                  className={cn(
-                    "group glass-card relative flex h-full flex-col gap-4 rounded-2xl p-5",
-                    "border border-white/8 transition-all duration-300",
-                    "hover:-translate-y-1 hover:border-violet-500/30",
-                    "hover:shadow-[0_0_30px_color-mix(in_oklch,var(--brand-via)_12%,transparent)]"
-                  )}
-                >
-                  {/* Icon + arrow row */}
-                  <div className="flex items-center justify-between">
-                    <span className="icon-gradient flex size-11 items-center justify-center rounded-xl text-white">
-                      <Icon className="size-5" />
-                    </span>
-                    <ArrowRightIcon
-                      className={cn(
-                        "size-4 -translate-x-1 text-muted-foreground opacity-0",
-                        "transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-hover:text-violet-400"
-                      )}
-                    />
-                  </div>
-
-                  {/* Text */}
-                  <div className="flex-1">
-                    <h3 className="font-heading text-base font-semibold leading-snug">
-                      {tool.name}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      {tool.shortDescription}
-                    </p>
-                  </div>
-
-                  {/* Category badge */}
-                  <div>
-                    <span
-                      className={cn(
-                        "inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
-                        categoryColors[tool.category]
-                      )}
-                    >
-                      {tool.category}
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            )
-          })}
+          {tools.map((tool, index) => (
+            <motion.div
+              key={tool.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: (index % 3) * 0.07 }}
+            >
+              <ToolCard tool={tool} />
+            </motion.div>
+          ))}
         </div>
 
         {/* CTA */}
@@ -126,6 +74,7 @@ export function ToolsShowcase() {
           <Button
             variant="outline"
             className="glass-panel border-white/10 px-6 hover:border-white/20"
+            nativeButton={false}
             render={<Link href="/tools" />}
           >
             View all tools

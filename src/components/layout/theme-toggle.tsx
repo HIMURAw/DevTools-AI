@@ -6,13 +6,17 @@ import { MoonIcon, SunIcon } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 
+const subscribeNoop = () => () => {}
+
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  // Theme is only known after client hydration; useSyncExternalStore lets us
+  // read a "mounted" flag that's correct for SSR without setState-in-effect.
+  const mounted = React.useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false
+  )
 
   return (
     <Button

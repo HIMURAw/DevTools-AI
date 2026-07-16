@@ -13,7 +13,7 @@ export function Logo({ className }: { className?: string }) {
         className
       )}
     >
-      <span className="flex size-7 items-center justify-center rounded-lg bg-gradient-brand text-white shadow-sm">
+      <span className="bg-gradient-brand flex size-7 items-center justify-center rounded-lg text-white shadow-sm">
         <Sparkles className="size-3.5" />
       </span>
       <span>{siteConfig.shortName}</span>

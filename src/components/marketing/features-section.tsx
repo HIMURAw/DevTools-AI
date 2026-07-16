@@ -89,7 +89,7 @@ export function FeaturesSection() {
             Built like a{" "}
             <span className="text-gradient-brand">real product</span>
           </h2>
-          <p className="mt-4 max-w-xl text-balance text-muted-foreground">
+          <p className="text-muted-foreground mt-4 max-w-xl text-balance">
             Not a weekend script — a toolkit designed to hold up under daily
             use.
           </p>
@@ -142,10 +142,10 @@ export function FeaturesSection() {
 
                 {/* Text */}
                 <div>
-                  <h3 className="font-heading text-base font-semibold leading-snug">
+                  <h3 className="font-heading text-base leading-snug font-semibold">
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

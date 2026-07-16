@@ -12,12 +12,12 @@ const footerColumns = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/8 bg-background/60 backdrop-blur-sm">
+    <footer className="bg-background/60 border-t border-white/8 backdrop-blur-sm">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div className="flex flex-col gap-3">
             <Logo />
-            <p className="max-w-xs text-sm text-muted-foreground">
+            <p className="text-muted-foreground max-w-xs text-sm">
               {siteConfig.description}
             </p>
             <div className="mt-2 flex items-center gap-1">
@@ -26,7 +26,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground flex size-8 items-center justify-center rounded-md transition-colors"
               >
                 <GitHubIcon className="size-4" />
               </a>
@@ -35,7 +35,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X (Twitter)"
-                className="flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="text-muted-foreground hover:bg-muted hover:text-foreground flex size-8 items-center justify-center rounded-md transition-colors"
               >
                 <XIcon className="size-4" />
               </a>
@@ -50,7 +50,7 @@ export function SiteFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-muted-foreground hover:text-foreground text-sm transition-colors"
                     >
                       {link.title}
                     </Link>
@@ -62,11 +62,11 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-6 sm:flex-row">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. Released
-            under the MIT License.
+          <p className="text-muted-foreground text-xs">
+            &copy; {new Date().getFullYear()} {siteConfig.name}. Released under
+            the MIT License.
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             Built with Next.js, shadcn/ui, and OpenRouter.
           </p>
         </div>
