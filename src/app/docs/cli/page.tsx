@@ -41,24 +41,31 @@ export default function DocsCliPage() {
       </p>
 
       <h2>Install</h2>
-      <p>Three ways to run it, from quickest to most permanent:</p>
-      <pre>{`# 1. From a clone, no install — good for trying it out
+      <p>Four ways to run it, from quickest to most permanent:</p>
+      <pre>{`# 1. From npm — the normal way, once published
+npm install -g @himuraw/devtools-ai
+devtools-ai list
+
+# 2. Straight from GitHub, no npm publish required
+npm install -g github:HIMURAw/DevTools-AI
+devtools-ai list
+
+# 3. From a local clone, no install — good for trying it out
 git clone https://github.com/HIMURAw/DevTools-AI.git
 cd DevTools-AI && pnpm install
 pnpm cli explain --file src/index.ts
 
-# 2. Global command, straight from GitHub — no clone needed
-npm install -g github:HIMURAw/DevTools-AI
-devtools-ai list
-
-# 3. Global command, from a local clone
+# 4. Global command, from a local clone
 git clone https://github.com/HIMURAw/DevTools-AI.git
 cd DevTools-AI && npm install -g .`}</pre>
       <p>
-        Methods 2 and 3 install a real <code>devtools-ai</code> command onto
+        Methods 1, 2, and 4 install a real <code>devtools-ai</code> command onto
         your <code>PATH</code> — the published package is a single bundled file
-        (see <Link href="/docs/architecture">Architecture</Link>), so
-        there&rsquo;s no separate build step to run yourself.
+        (see <Link href="/docs/architecture">Architecture</Link>
+        ), so there&rsquo;s no separate build step to run yourself. The package
+        is also mirrored to GitHub Packages as <code>@himuraw/devtools-ai</code>
+        , though installing from there requires authenticating npm with a GitHub
+        token even for public packages — npm is the recommended source.
       </p>
 
       <h2>Configuration</h2>

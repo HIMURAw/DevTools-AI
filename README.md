@@ -9,6 +9,7 @@
 **Ten single-purpose AI developer tools. One clean interface. Web app _and_ CLI.**
 
 [![CI](https://github.com/HIMURAw/DevTools-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/HIMURAw/DevTools-AI/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/%40himuraw%2Fdevtools-ai.svg)](https://www.npmjs.com/package/@himuraw/devtools-ai)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)](https://nextjs.org)
 [![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev)
@@ -77,7 +78,10 @@ pnpm dev                          # http://localhost:3000
 **CLI** (no clone needed):
 
 ```bash
+npm install -g @himuraw/devtools-ai
+# or, without waiting on a published release:
 npm install -g github:HIMURAw/DevTools-AI
+
 devtools-ai explain --file src/index.ts
 ```
 
