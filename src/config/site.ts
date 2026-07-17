@@ -7,7 +7,7 @@ export const siteConfig = {
   url: "https://devtools-ai.dev",
   ogImage: "/og.png",
   links: {
-    github: "https://github.com/HIMURAw/devtools-ai",
+    github: "https://github.com/HIMURAw/DevTools-AI",
     twitter: "https://twitter.com",
   },
   creator: "HIMURA",

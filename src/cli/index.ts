@@ -19,19 +19,6 @@ for (const file of [".env.local", ".env"]) {
   }
 }
 
-const CLI_ALIASES: Record<string, string> = {
-  "code-explainer": "explain",
-  "bug-finder": "bugs",
-  "commit-message-generator": "commit",
-  "readme-generator": "readme",
-  "regex-generator": "regex",
-  "sql-generator": "sql",
-  "json-to-typescript": "json2ts",
-  "email-generator": "email",
-  "code-optimizer": "optimize",
-  "code-reviewer": "review",
-}
-
 const require = createRequire(import.meta.url)
 const { version } = require("../../package.json") as { version: string }
 
@@ -47,10 +34,7 @@ program
   .description("List every available tool")
   .action(() => {
     for (const tool of tools) {
-      const alias = CLI_ALIASES[tool.slug]
-      const name = alias
-        ? `${alias} ${colors.dim(`(${tool.slug})`)}`
-        : tool.slug
+      const name = `${tool.cliAlias} ${colors.dim(`(${tool.slug})`)}`
       console.log(`  ${colors.cyan(name)}`)
       console.log(`    ${tool.shortDescription}`)
     }
@@ -88,8 +72,7 @@ for (const tool of tools) {
       String(DEFAULT_MAX_TOKENS)
     )
 
-  const alias = CLI_ALIASES[tool.slug]
-  if (alias) command.alias(alias)
+  command.alias(tool.cliAlias)
 
   for (const field of tool.fields) {
     if (field.id === "input") continue

@@ -61,6 +61,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: codeExplainer.schema,
     buildPrompt: codeExplainer.buildPrompt,
+    cliAlias: "explain",
   },
   {
     id: "bug-finder",
@@ -90,6 +91,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: bugFinder.schema,
     buildPrompt: bugFinder.buildPrompt,
+    cliAlias: "bugs",
   },
   {
     id: "commit-message-generator",
@@ -118,6 +120,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: commitMessageGenerator.schema,
     buildPrompt: commitMessageGenerator.buildPrompt,
+    cliAlias: "commit",
   },
   {
     id: "readme-generator",
@@ -147,6 +150,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: readmeGenerator.schema,
     buildPrompt: readmeGenerator.buildPrompt,
+    cliAlias: "readme",
   },
   {
     id: "regex-generator",
@@ -187,6 +191,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: regexGenerator.schema,
     buildPrompt: regexGenerator.buildPrompt,
+    cliAlias: "regex",
   },
   {
     id: "sql-generator",
@@ -236,6 +241,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: sqlGenerator.schema,
     buildPrompt: sqlGenerator.buildPrompt,
+    cliAlias: "sql",
   },
   {
     id: "json-to-typescript",
@@ -272,6 +278,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: jsonToTypescript.schema,
     buildPrompt: jsonToTypescript.buildPrompt,
+    cliAlias: "json2ts",
   },
   {
     id: "email-generator",
@@ -314,6 +321,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: emailGenerator.schema,
     buildPrompt: emailGenerator.buildPrompt,
+    cliAlias: "email",
   },
   {
     id: "code-optimizer",
@@ -344,6 +352,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: codeOptimizer.schema,
     buildPrompt: codeOptimizer.buildPrompt,
+    cliAlias: "optimize",
   },
   {
     id: "code-reviewer",
@@ -374,6 +383,7 @@ export const tools: ToolDefinition[] = [
     },
     schema: codeReviewer.schema,
     buildPrompt: codeReviewer.buildPrompt,
+    cliAlias: "review",
   },
 ]
 

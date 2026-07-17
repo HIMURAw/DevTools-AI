@@ -112,11 +112,13 @@ CLI:  src/cli/index.ts  (one Commander subcommand per registry entry)
           </tr>
           <tr>
             <td>
-              <code>bin/devtools-ai.mjs</code>
+              <code>scripts/build-cli.mjs</code>
             </td>
             <td>
-              The global <code>devtools-ai</code> launcher installed via{" "}
-              <code>npm link</code>
+              esbuild bundles <code>src/cli</code> into{" "}
+              <code>dist/cli/index.mjs</code>, resolving every <code>@/</code>{" "}
+              import to a real relative path — the published npm package is this
+              one file, no TypeScript loader needed at runtime
             </td>
           </tr>
         </tbody>

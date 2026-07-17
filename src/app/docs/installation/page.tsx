@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 
 import { Prose } from "@/components/docs/prose"
 
@@ -94,19 +95,13 @@ export default function DocsInstallationPage() {
       <pre>
         {`pnpm cli explain --file src/index.ts
 
-# or install it globally
-npm link
-devtools-ai list
-devtools-ai review --file src/app.ts
-devtools-ai commit "fixed a race condition in the upload handler"
-cat schema.sql | devtools-ai sql "top 10 customers by revenue"`}
+# or install the devtools-ai command globally
+npm install -g github:HIMURAw/DevTools-AI
+devtools-ai list`}
       </pre>
       <p>
-        Each tool command accepts inline text, <code>--file &lt;path&gt;</code>,
-        or piped stdin as its primary input, plus <code>--model</code>,{" "}
-        <code>--temperature</code>, <code>--max-tokens</code>, and any
-        tool-specific flags — run <code>devtools-ai &lt;tool&gt; --help</code>{" "}
-        to see them.
+        See <Link href="/docs/cli">CLI Reference</Link> for every install
+        method, every command, and every flag.
       </p>
 
       <h2>Adding an 11th tool</h2>

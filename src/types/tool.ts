@@ -34,4 +34,6 @@ export interface ToolDefinition {
   exampleInput: ToolInput
   schema: ZodTypeAny
   buildPrompt: (input: ToolInput) => ToolPrompt
+  /** Short alias for the CLI, e.g. "explain" for code-explainer. */
+  cliAlias: string
 }

@@ -15,18 +15,21 @@ import { GitHubIcon } from "@/components/common/icons"
 import { siteConfig } from "@/config/site"
 
 const terminalLines = [
-  { prompt: "$", command: "devtools explain --file src/auth.ts", delay: 0 },
-  { prompt: ">", command: "Analyzing 142 lines…", delay: 0.4, muted: true },
   {
-    prompt: ">",
-    command: "✓ JWT validation flow detected",
-    delay: 0.7,
-    success: true,
+    prompt: "$",
+    command: "npm install -g github:HIMURAw/DevTools-AI",
+    delay: 0,
+  },
+  { prompt: ">", command: "✓ devtools-ai ready", delay: 0.5, success: true },
+  {
+    prompt: "$",
+    command: "devtools-ai explain --file src/auth.ts",
+    delay: 0.9,
   },
   {
     prompt: ">",
-    command: "✓ 3 potential edge cases found",
-    delay: 1.0,
+    command: "✓ Streaming explanation…",
+    delay: 1.3,
     success: true,
   },
 ]
@@ -217,11 +220,7 @@ export function HeroSection() {
                   </span>
                   <span
                     className={
-                      line.success
-                        ? "text-emerald-400"
-                        : line.muted
-                          ? "text-muted-foreground"
-                          : "text-foreground"
+                      line.success ? "text-emerald-400" : "text-foreground"
                     }
                   >
                     {line.command}
@@ -250,6 +249,15 @@ export function HeroSection() {
               filter: "blur(20px)",
             }}
           />
+          <p className="text-muted-foreground mt-3 text-center text-xs">
+            Prefer the terminal?{" "}
+            <Link
+              href="/docs/cli"
+              className="hover:text-foreground underline underline-offset-2"
+            >
+              Full CLI reference
+            </Link>
+          </p>
         </motion.div>
       </div>
     </section>

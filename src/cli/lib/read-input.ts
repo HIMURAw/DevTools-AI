@@ -1,11 +1,4 @@
 import { readFile } from "node:fs/promises"
-import path from "node:path"
-
-// The bin launcher pins the child process's cwd to the package root (so
-// .env/.env.local resolve consistently) and forwards the user's real cwd
-// here, so --file paths still resolve relative to where the user actually
-// ran the command instead of relative to this package.
-const callerCwd = process.env.DEVTOOLS_AI_CALLER_CWD || process.cwd()
 
 async function readStdin(): Promise<string> {
   if (process.stdin.isTTY) return ""
@@ -22,8 +15,7 @@ export async function resolvePrimaryInput(params: {
   positional?: string
 }): Promise<string> {
   if (params.file) {
-    const filePath = path.resolve(callerCwd, params.file)
-    return (await readFile(filePath, "utf-8")).trim()
+    return (await readFile(params.file, "utf-8")).trim()
   }
   if (params.positional) {
     return params.positional

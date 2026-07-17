@@ -2,16 +2,43 @@
   "name": "devtools-ai",
   "version": "0.1.0",
   "private": true,
-  "description": "An AI-powered developer toolkit built with Next.js, TypeScript and OpenRouter.",
-  "license": "MIT",
-  "bin": {
-    "devtools-ai": "./bin/devtools-ai.mjs"
+  "description": "An AI-powered developer toolkit — 10 tools available as a web app and a CLI, powered by OpenRouter.",
+  "keywords": [
+    "ai",
+    "cli",
+    "developer-tools",
+    "openrouter",
+    "nextjs",
+    "code-review",
+    "code-explainer"
+  ],
+  "homepage": "https://devtools-ai.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HIMURAw/DevTools-AI.git"
   },
+  "bugs": {
+    "url": "https://github.com/HIMURAw/DevTools-AI/issues"
+  },
+  "license": "MIT",
+  "author": "HIMURA",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "bin": {
+    "devtools-ai": "./dist/cli/index.mjs"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "cli": "tsx src/cli/index.ts",
+    "build:cli": "node scripts/build-cli.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -20,7 +47,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
+    "prepare": "husky || true && node scripts/build-cli.mjs",
+    "prepack": "node scripts/build-cli.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
@@ -56,6 +84,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.3",
+    "esbuild": "^0.28.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "eslint-config-prettier": "^10.1.8",

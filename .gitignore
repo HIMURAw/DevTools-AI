@@ -51,6 +51,9 @@ next-env.d.ts
 # Vercel
 .vercel
 
+# Compiled CLI (built by scripts/build-cli.mjs, see prepack/prepare)
+/dist
+
 # Optional npm cache directory
 .npm
 
