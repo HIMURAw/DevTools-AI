@@ -17,7 +17,7 @@
 [![OpenRouter](https://img.shields.io/badge/AI-OpenRouter-8A2BE2)](https://openrouter.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-[Live site](https://devtools-ai.dev) · [Docs](https://devtools-ai.dev/docs) · [CLI Reference](https://devtools-ai.dev/docs/cli) · [Report a bug](https://github.com/HIMURAw/DevTools-AI/issues)
+[Live site](https://dev-tools-ai-gilt.vercel.app) · [Docs](https://dev-tools-ai-gilt.vercel.app/docs) · [CLI Reference](https://dev-tools-ai-gilt.vercel.app/docs/cli) · [Report a bug](https://github.com/HIMURAw/DevTools-AI/issues)
 
 </div>
 
