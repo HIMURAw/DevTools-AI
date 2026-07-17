@@ -74,8 +74,40 @@ export default function DocsInstallationPage() {
             </td>
             <td>Vitest, once or in watch mode</td>
           </tr>
+          <tr>
+            <td>
+              <code>pnpm cli</code>
+            </td>
+            <td>
+              Run the CLI without installing it globally, e.g.{" "}
+              <code>pnpm cli explain --file src/index.ts</code>
+            </td>
+          </tr>
         </tbody>
       </table>
+
+      <h2>The CLI</h2>
+      <p>
+        The same ten tools are available from the terminal, backed by the exact
+        same prompts and validation as the web app.
+      </p>
+      <pre>
+        {`pnpm cli explain --file src/index.ts
+
+# or install it globally
+npm link
+devtools-ai list
+devtools-ai review --file src/app.ts
+devtools-ai commit "fixed a race condition in the upload handler"
+cat schema.sql | devtools-ai sql "top 10 customers by revenue"`}
+      </pre>
+      <p>
+        Each tool command accepts inline text, <code>--file &lt;path&gt;</code>,
+        or piped stdin as its primary input, plus <code>--model</code>,{" "}
+        <code>--temperature</code>, <code>--max-tokens</code>, and any
+        tool-specific flags — run <code>devtools-ai &lt;tool&gt; --help</code>{" "}
+        to see them.
+      </p>
 
       <h2>Adding an 11th tool</h2>
       <p>Every tool is defined in one place: no new routes required.</p>
@@ -90,8 +122,8 @@ export default function DocsInstallationPage() {
         </li>
       </ul>
       <p>
-        The shared route handler, form, and output renderer all pick it up
-        automatically.
+        The shared route handler, form, output renderer, and CLI command all
+        pick it up automatically.
       </p>
     </Prose>
   )

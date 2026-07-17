@@ -12,6 +12,7 @@ import { useAiCompletion } from "@/hooks/use-ai-completion"
 import { useSettingsStore } from "@/lib/store/settings-store"
 import { AI_MODELS } from "@/config/models"
 import { getToolBySlug } from "@/config/tools.config"
+import { getDefaultInput } from "@/services/tool.service"
 import { detectLanguage } from "@/lib/utils/detect-language"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -25,14 +26,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ToolOutputPanel } from "@/components/tools/tool-output-panel"
-
-function emptyDefaults(tool: ToolDefinition): ToolInput {
-  return tool.fields.reduce<ToolInput>((acc, field) => {
-    acc[field.id] =
-      field.type === "select" ? (field.options?.[0]?.value ?? "") : ""
-    return acc
-  }, {})
-}
 
 export function ToolShell({ slug }: { slug: string }) {
   const tool = getToolBySlug(slug)
@@ -59,7 +52,7 @@ function ToolShellForTool({ tool }: { tool: ToolDefinition }) {
     formState: { errors, dirtyFields },
   } = useForm<ToolInput>({
     resolver: zodResolver(tool.schema as ZodType<ToolInput, ToolInput>),
-    defaultValues: emptyDefaults(tool),
+    defaultValues: getDefaultInput(tool),
   })
 
   const onSubmit = handleSubmit((values) => {
@@ -88,7 +81,7 @@ function ToolShellForTool({ tool }: { tool: ToolDefinition }) {
   }
 
   const handleReset = () => {
-    resetForm(emptyDefaults(tool))
+    resetForm(getDefaultInput(tool))
     reset()
   }
 

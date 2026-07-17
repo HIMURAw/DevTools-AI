@@ -4,10 +4,14 @@
   "private": true,
   "description": "An AI-powered developer toolkit built with Next.js, TypeScript and OpenRouter.",
   "license": "MIT",
+  "bin": {
+    "devtools-ai": "./bin/devtools-ai.mjs"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "cli": "tsx src/cli/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -23,6 +27,7 @@
     "@hookform/resolvers": "^5.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "commander": "^15.0.0",
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.24.0",
     "next": "16.2.10",
@@ -35,6 +40,7 @@
     "shadcn": "^4.13.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.6.0",
+    "tsx": "^4.23.1",
     "tw-animate-css": "^1.4.0",
     "zod": "^4.4.3",
     "zustand": "^5.0.14"
@@ -62,5 +68,10 @@
     "typescript": "^5",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.10"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }

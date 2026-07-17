@@ -17,15 +17,27 @@ export default function DocsArchitecturePage() {
       </p>
 
       <h2>Request flow</h2>
-      <pre>{`ToolShell (client)
-  -> useAiCompletion hook
-  -> POST /api/ai/[slug]
-       -> tools.config.ts  (look up tool by slug)
-       -> tool.schema.safeParse(input)  (Zod validation)
-       -> services/ai-service.ts  (build prompt + call OpenRouter)
-       -> lib/ai/openrouter-client.ts  (server-only, streams response)
-  <- plain-text stream
-  -> ToolOutputPanel renders markdown / code / text`}</pre>
+      <p>
+        The web app and the CLI both end up calling the same{" "}
+        <code>services/ai-service.ts</code> — the web app through an HTTP round
+        trip, the CLI by importing it directly, since it runs in the same Node
+        process.
+      </p>
+      <pre>{`Web:  ToolShell (client)
+        -> useAiCompletion hook
+        -> POST /api/ai/[slug]
+             -> tools.config.ts  (look up tool by slug)
+             -> tool.schema.safeParse(input)  (Zod validation)
+             -> services/ai-service.ts  (build prompt + call OpenRouter)
+             -> lib/ai/openrouter-client.ts  (server-only, streams response)
+        <- plain-text stream
+        -> ToolOutputPanel renders markdown / code / text
+
+CLI:  src/cli/index.ts  (one Commander subcommand per registry entry)
+        -> runToolCommand()  (collect --flags, file/stdin, or --example)
+        -> tool.schema.safeParse(input)  (same Zod validation)
+        -> services/ai-service.ts  (same call, no HTTP hop)
+        -> process.stdout.write() as chunks arrive`}</pre>
 
       <h2>Where things live</h2>
       <table>
@@ -80,6 +92,33 @@ export default function DocsArchitecturePage() {
             </td>
             <td>Zustand store for model, temperature, and max tokens</td>
           </tr>
+          <tr>
+            <td>
+              <code>services/tool.service.ts</code>
+            </td>
+            <td>
+              Framework-agnostic helpers (like default input values) shared by
+              the web form and the CLI
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>src/cli/index.ts</code>
+            </td>
+            <td>
+              The CLI entry point — generates one subcommand per tool from the
+              same registry
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code>bin/devtools-ai.mjs</code>
+            </td>
+            <td>
+              The global <code>devtools-ai</code> launcher installed via{" "}
+              <code>npm link</code>
+            </td>
+          </tr>
         </tbody>
       </table>
 
@@ -95,9 +134,14 @@ export default function DocsArchitecturePage() {
           route rejects anything else.
         </li>
         <li>
-          <strong>No server-side storage.</strong> There is no database.
-          Nothing about a request is persisted after the response streams
-          back.
+          <strong>No server-side storage.</strong> There is no database. Nothing
+          about a request is persisted after the response streams back.
+        </li>
+        <li>
+          <strong>One registry, two frontends.</strong> The CLI never calls the
+          HTTP route — it imports <code>services/ai-service.ts</code> directly,
+          so it stays in sync with the web app by construction rather than by
+          duplicating logic.
         </li>
       </ul>
     </Prose>
