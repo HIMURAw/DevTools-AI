@@ -1,0 +1,39 @@
+name: Feature request
+description: Suggest a new tool, a new model, or an improvement
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: What kind of request is this?
+      options:
+        - A new tool (11th tool)
+        - A new OpenRouter model
+        - An improvement to an existing tool
+        - CLI improvement
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: I'm always doing X by hand, and it would be nice if...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: If you're proposing a new tool, what should its input/output look like?
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: false

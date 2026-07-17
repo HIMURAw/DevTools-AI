@@ -1,0 +1,73 @@
+name: Bug report
+description: Something in the web app or the CLI isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. For security vulnerabilities, please use [SECURITY.md](../../SECURITY.md) instead of a public issue.
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did this happen?
+      options:
+        - Web app
+        - CLI
+        - Both
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+      placeholder: The Code Explainer tool returns a 500 error when I paste code longer than...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Run `devtools-ai ...` or click '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: "`devtools-ai --version` for the CLI, or the deployment/commit for the web app"
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: |
+        - OS: Windows 11 / macOS 15 / Ubuntu 24.04
+        - Node version: `node -v`
+        - Browser (if web): Chrome 128
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or screenshots
+      render: shell
+    validations:
+      required: false

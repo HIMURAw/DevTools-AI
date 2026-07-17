@@ -1,88 +1,131 @@
+<div align="center">
+
+<img src=".github/assets/hero.png" alt="DevTools AI — the AI toolkit developers actually reach for" width="100%" />
+
+<br />
+
 # DevTools AI
 
-An AI-powered developer toolkit — ten single-purpose tools (code explainer, bug finder, commit message generator, README generator, regex/SQL/TypeScript generators, email generator, code optimizer, code reviewer) sharing one AI service layer, available both as a **web app** and a **CLI**, powered by [OpenRouter](https://openrouter.ai).
+**Ten single-purpose AI developer tools. One clean interface. Web app _and_ CLI.**
 
-## Features
+[![CI](https://github.com/HIMURAw/DevTools-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/HIMURAw/DevTools-AI/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![OpenRouter](https://img.shields.io/badge/AI-OpenRouter-8A2BE2)](https://openrouter.ai)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
-- 10 focused AI tools behind one clean interface — see [Features](https://devtools-ai.dev/features) for details
-- Streaming responses, in the browser and in the terminal
-- Bring-your-own model: a curated list of free OpenRouter models, `qwen/qwen3-coder:free` by default
-- Automatic programming-language detection for code inputs
-- No accounts, no database — preferences persist only in your browser's local storage
-- Dark-mode-first UI built with Next.js 16, React 19, Tailwind CSS v4, and shadcn/ui
+[Live site](https://devtools-ai.dev) · [Docs](https://devtools-ai.dev/docs) · [CLI Reference](https://devtools-ai.dev/docs/cli) · [Report a bug](https://github.com/HIMURAw/DevTools-AI/issues)
 
-## Installation
+</div>
 
-Requires Node.js 20.9+ and [pnpm](https://pnpm.io).
+<br />
+
+Most AI coding assistants live inside an editor or a chat window that doesn't fit every task. **DevTools AI is the opposite**: ten focused tools — explain, review, optimize, generate — each with exactly the input and output it needs, nothing else in the way. Bring your own [OpenRouter](https://openrouter.ai) key, no vendor lock-in, no account, no data stored.
+
+Use it as a **web app**, or install the **exact same tools** as a `devtools-ai` command in your terminal — same prompts, same validation, same streaming, one shared service layer underneath.
+
+## Why you might want this
+
+- **10 tools, one interface** — code explainer, bug finder, commit message generator, README generator, regex/SQL/JSON→TS generators, email generator, code optimizer, code reviewer
+- **Streams as it thinks** — in the browser and in the terminal, no spinner staring
+- **Bring your own model** — a curated list of free OpenRouter models, switch anytime
+- **Auto language detection** — paste code, the language field fills itself in
+- **Also a real CLI** — `npm install -g` and pipe `git diff` straight into it
+- **Nothing stored** — no accounts, no database; your key stays server-side, your prefs stay in your browser
+- **Dark mode first**, built with shadcn/ui and a proper glassmorphism pass, not a default template
+
+## See it in action
+
+<table>
+<tr>
+<td width="50%">
+
+**Explain any snippet, streamed live**
+<img src=".github/assets/tool-run.png" alt="AI Code Explainer streaming a real result" width="100%" />
+
+</td>
+<td width="50%">
+
+**Ten tools, one grid**
+<img src=".github/assets/tools-grid.png" alt="The tools directory" width="100%" />
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>Model, temperature, and theme — all in Settings</b></summary>
+<br />
+<img src=".github/assets/settings.png" alt="Settings page" width="100%" />
+</details>
+
+## Quick start
+
+**Web app:**
 
 ```bash
-git clone <your-fork-url>
-cd devtools-ai
+git clone https://github.com/HIMURAw/DevTools-AI.git
+cd DevTools-AI
 pnpm install
-cp .env.example .env.local
-# add your OPENROUTER_API_KEY to .env.local — a key with no credits works,
-# since the default model is free
+cp .env.example .env.local        # add your OPENROUTER_API_KEY
+pnpm dev                          # http://localhost:3000
 ```
 
-## Development
+**CLI** (no clone needed):
 
 ```bash
-pnpm dev            # start the web app at http://localhost:3000
-pnpm cli --help      # run the CLI without installing it globally
-pnpm build           # production build
-pnpm lint            # ESLint
-pnpm typecheck       # TypeScript, no emit
-pnpm test            # Vitest
-```
-
-Full docs, including the API contract and architecture, live at [`/docs`](https://devtools-ai.dev/docs) (or `pnpm dev` and visit `/docs` locally).
-
-## Using the CLI
-
-The same ten tools are available from the terminal, backed by the exact same prompts and validation as the web app. Full command-by-command usage is at [`/docs/cli`](https://devtools-ai.dev/docs/cli).
-
-```bash
-# run from source, no install needed
-pnpm cli explain --file src/index.ts
-
-# install the devtools-ai command globally — either from a local clone...
-npm install -g .
-# ...or straight from GitHub, no clone needed
 npm install -g github:HIMURAw/DevTools-AI
-
-devtools-ai list
-devtools-ai review --file src/app.ts
-devtools-ai commit "fixed a race condition in the upload handler"
-cat schema.sql | devtools-ai sql "top 10 customers by revenue"
+devtools-ai explain --file src/index.ts
 ```
 
-The CLI reads `OPENROUTER_API_KEY` the same way any CLI tool reads config: from your environment, or from a `.env`/`.env.local` in whatever directory you run it from.
+A key with zero credits works fine — the default model, `qwen/qwen3-coder:free`, is free. Full setup details: [Installation](https://devtools-ai.dev/docs/installation) · [CLI Reference](https://devtools-ai.dev/docs/cli).
 
-Each tool command accepts inline text, `--file <path>`, or piped stdin as its primary input, plus `--model`, `--temperature`, `--max-tokens`, and any tool-specific flags (run `devtools-ai <tool> --help` to see them). `devtools-ai models` lists the available OpenRouter models.
+## The ten tools
 
-## Folder structure
+| Tool                     | What it does                                                 | CLI                    |
+| ------------------------ | ------------------------------------------------------------ | ---------------------- |
+| AI Code Explainer        | Plain-English breakdown of what a snippet does               | `devtools-ai explain`  |
+| Bug Finder               | Flags logic errors and edge cases, with a fix for each       | `devtools-ai bugs`     |
+| Commit Message Generator | Diff or description → Conventional Commit message            | `devtools-ai commit`   |
+| README Generator         | Project details → a structured README.md                     | `devtools-ai readme`   |
+| Regex Generator          | Plain language → a working, explained regular expression     | `devtools-ai regex`    |
+| SQL Generator            | Plain language (+ optional schema) → a ready-to-run query    | `devtools-ai sql`      |
+| JSON → TypeScript        | Raw JSON → precise, well-named interfaces                    | `devtools-ai json2ts`  |
+| Email Generator          | Situation + tone → a ready-to-send email                     | `devtools-ai email`    |
+| Code Optimizer           | Concrete, before/after performance & readability suggestions | `devtools-ai optimize` |
+| Code Reviewer            | Structured review: correctness, style, security, priorities  | `devtools-ai review`   |
+
+## How it's built
+
+One tool registry (`config/tools.config.ts`) drives everything: the web form, the output renderer, the API route, and every CLI subcommand. Add an 11th tool by adding one entry — nothing else to wire up.
 
 ```
-src/
-  app/            Next.js routes (marketing pages, /tools, /docs, /api/ai/[slug])
-  cli/            The CLI entry point and its Commander wiring
-  components/     ui/ (shadcn primitives), layout/, tools/, marketing/, docs/, settings/, common/
-  config/         site.ts, models.ts, tools.config.ts (the tool registry), docs.ts
-  constants/      limits.ts, storage-keys.ts
-  hooks/          use-ai-completion, use-mounted
-  lib/
-    ai/           openrouter-client.ts (server-only) and prompts/ (one file per tool)
-    store/        Zustand settings store
-    validations/  Zod schemas shared across the app
-  services/       ai-service.ts and tool.service.ts — the layer the web UI and CLI both call
-  types/          shared TypeScript types
-scripts/          build-cli.mjs — bundles src/cli into dist/cli/index.mjs for npm
-dist/             generated by build-cli.mjs, not checked in — this is what gets published
+ToolShell (web)  ─┐
+                   ├─▶ tool.schema.safeParse()  ─▶  services/ai-service.ts  ─▶  OpenRouter
+src/cli (CLI)    ─┘         (same Zod schema)          (same service, no HTTP hop for the CLI)
 ```
 
-The web UI and the CLI both call the same `services/ai-service.ts`, which builds a prompt from a tool's registry entry (`config/tools.config.ts`) and streams a completion via `lib/ai/openrouter-client.ts`. Adding an 11th tool means adding one entry to the registry — both the web UI and the CLI pick it up automatically.
+- **Next.js 16** (App Router, Turbopack) · **React 19** · **TypeScript**, strict, no `any`
+- **Tailwind CSS v4** + **shadcn/ui** (Base UI primitives) for the interface
+- **Zustand** for persisted settings · **React Hook Form + Zod** for every form and API boundary
+- **Framer Motion** for the marketing pages · **Commander** + **esbuild** for the CLI
+- No database, no auth, no analytics — see [Privacy](https://devtools-ai.dev/privacy) for exactly what happens to your data
 
-The published npm package only ships `dist/`, not the TypeScript source — `pnpm build:cli` bundles `src/cli` with esbuild, resolving every `@/` import to a real relative path, so the installed CLI never depends on a TypeScript loader at runtime. It's rebuilt automatically before `npm pack`/`npm publish` (`prepack`) and after `pnpm install` (`prepare`).
+Full write-up: [Architecture](https://devtools-ai.dev/docs/architecture).
+
+## Documentation
+
+|                                                             |                                              |
+| ----------------------------------------------------------- | -------------------------------------------- |
+| [Getting Started](https://devtools-ai.dev/docs)             | What this is and how the pieces fit together |
+| [Installation](https://devtools-ai.dev/docs/installation)   | Setup, scripts, adding a new tool            |
+| [Configuration](https://devtools-ai.dev/docs/configuration) | Every environment variable                   |
+| [CLI Reference](https://devtools-ai.dev/docs/cli)           | Every command, every flag, real examples     |
+| [Architecture](https://devtools-ai.dev/docs/architecture)   | Request flow and design choices              |
+| [API Reference](https://devtools-ai.dev/docs/api)           | The `/api/ai/[slug]` contract                |
 
 ## Environment variables
 
@@ -93,8 +136,15 @@ The published npm package only ships `dist/`, not the TypeScript source — `pnp
 
 ## Contributing
 
-Issues and pull requests are welcome — see [Contact](https://devtools-ai.dev/contact) or open an issue directly on GitHub.
+Issues and pull requests are genuinely welcome — small fixes, a new tool, a new OpenRouter model, docs corrections, all of it.
+
+1. Fork and clone the repo, `pnpm install`
+2. `pnpm dev` for the web app, `pnpm cli --help` for the CLI
+3. `pnpm lint && pnpm typecheck && pnpm test` before opening a PR
+4. Commits follow [Conventional Commits](https://www.conventionalcommits.org) (enforced by commitlint)
+
+If you use this and like it, starring the repo helps other developers find it.
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © [HIMURA](https://github.com/HIMURAw)

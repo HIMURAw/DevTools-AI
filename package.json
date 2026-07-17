@@ -2,6 +2,7 @@
   "name": "devtools-ai",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.13.1",
   "description": "An AI-powered developer toolkit — 10 tools available as a web app and a CLI, powered by OpenRouter.",
   "keywords": [
     "ai",
